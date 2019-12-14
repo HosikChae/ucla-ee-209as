@@ -1,0 +1,93 @@
+<?xml version="1.0"?>
+<robot name="Pendulum">
+
+    <link name="world">
+        <inertial>
+            <origin xyz="0 0 0"/>
+            <mass value="0"/>
+            <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+        </inertial>
+    </link>
+
+    <joint name="base_weld" type="fixed">
+        <parent link="world"/>
+        <child link="base"/>
+        <origin xyz="0 0 2.5"/>
+    </joint>
+
+    <link name="base">
+        <inertial>
+            <origin rpy="0 0 0" xyz="0 0 0"/>
+            <mass value="1"/>
+            <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0"/>
+            <geometry>
+                <sphere radius=".015"/>
+            </geometry>
+            <material name="Gray">
+                <color rgba="0 0 0 0.5"/>
+            </material>
+        </visual>
+    </link>
+
+    <joint name="theta" type="continuous">
+        <parent link="base"/>
+        <child link="arm"/>
+        <axis xyz="0 1 0"/>
+        <dynamics damping="0.1"/>
+    </joint>
+
+    <link name="arm">
+        <inertial>
+            <origin rpy="0 0 0" xyz="0 0 .25"/>
+            <mass value="0.5"/>
+            <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+        </inertial>
+        <visual>
+            <origin rpy="0 0 0" xyz="0 0 .25"/>
+            <geometry>
+                <cylinder length=".5" radius=".01"/>
+            </geometry>
+            <material name="Gray">
+                <color rgba="0 0 0 0.5"/>
+            </material>
+        </visual>
+        <collision>
+            <origin rpy="0 0 0" xyz="0 0 .25"/>
+            <geometry>
+                <cylinder length=".5" radius=".01"/>
+            </geometry>
+        </collision>
+    </link>
+
+    <joint name="arm_weld" type="fixed">
+        <parent link="arm"/>
+        <child link="arm_com"/>
+        <origin xyz="0 0 .5"/>
+    </joint>
+
+    <link name="arm_com">
+        <inertial>
+            <origin rpy="0 0 0" xyz="0 0 0"/>
+            <mass value="0.5"/>
+            <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0"/>
+            <geometry>
+                <sphere radius=".025"/>
+            </geometry>
+            <material name="Gray">
+                <color rgba="0 0 0 0.5"/>
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0"/>
+            <geometry>
+                <sphere radius=".025"/>
+            </geometry>
+        </collision>
+    </link>
+</robot>
