@@ -122,3 +122,8 @@ There are two sub-folders (normal, cart) containing the different weights for th
 `bdr`: Agent trained with "big" domain randomization.
 
 `edr`: Agent trained using EDR. (Only available in `cart`)
+
+## Visualize Logs
+```shell
+tensorboard --logdir logs
+```
